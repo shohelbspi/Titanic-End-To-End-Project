@@ -1,0 +1,107 @@
+<!-- mlwebintegration/mlapp/templates/predict.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Predictions</title>
+</head>
+<style>
+    div {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    input,
+    select,
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    p {
+        font-size: 18px;
+        margin-top: 15px;
+    }
+</style>
+<body>
+    <h1 style="text-align:center">Survived Predict Using Titanic Dataset</h1>
+   
+    <div>
+        <form method="post" action="{% url 'predict' %}">
+            {% csrf_token %}
+    
+            <label for="pclass">Pclass:</label>
+            <input type="number" id="pclass" name="pclass" required>
+    
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+    
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+    
+            <label for="sibsp">SibSp:</label>
+            <input type="number" id="sibsp" name="sibsp" required>
+    
+            <label for="parch">Parch:</label>
+            <input type="number" id="parch" name="parch" required>
+    
+            <label for="fare">Fare:</label>
+            <input type="number" id="fare" name="fare" required>
+    
+            <label for="embarked">Embarked:</label>
+            <select id="embarked" name="embarked" required>
+                <option value="C">C</option>
+                <option value="Q">Q</option>
+                <option value="S">S</option>
+            </select>
+    
+            <button type="submit">Make Prediction</button>
+        </form>
+    </div>
+
+    {% if prediction %}
+    <h3 style="text-align:center">Prediction: {{ prediction }}</h3>
+    {% endif %}
+</body>
+</html>
